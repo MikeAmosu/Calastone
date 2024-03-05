@@ -33,7 +33,7 @@ namespace UnitTest.Core.Filters
             var service = CreateWordFilter("");
 
             //Act
-            var ex = Assert.Throws<ArgumentNullException>(() => service.Process(Constants.MiddleCharVowelWordFilter.Expected1.Content, string.Empty));
+            var ex = Assert.Throws<ArgumentNullException>("_charsToFind", () => service.Process(Constants.MiddleCharVowelWordFilter.Expected1.Content, string.Empty));
 
             //Assert
             Assert.IsType<ArgumentNullException>(ex);
