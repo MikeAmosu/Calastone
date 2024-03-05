@@ -15,15 +15,10 @@ public class ContentFilter : IContentFilter
         _fileReaderService = fileReaderService;
     }
 
-    public string ProcessFile(IFilter[] filters, string? filePath = null)
+    public async Task<string> ProcessFile(IFilter[] filters, string? filePath = null)
     {
-        var textContexts = ReadFile(filePath);
+        var textContexts = await _fileReaderService.ReadFile(filePath).ConfigureAwait(false);
         return ApplyFilters(textContexts, filters);
-    }
-
-    private string ReadFile(string? filePath = null)
-    {
-        return _fileReaderService.ReadFile(filePath);
     }
 
     private string ApplyFilters(string content, IFilter[] filters)

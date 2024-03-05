@@ -14,7 +14,7 @@ public class FileReaderService : IFileReaderService
         _filePath = string.Empty;
     }
 
-    public string ReadFile(string? newfilePath = null)
+    public async Task<string> ReadFile(string? newfilePath = null)
     {
         var newFilePathName = string.IsNullOrEmpty(newfilePath)
             ? _filePath 
@@ -33,7 +33,7 @@ public class FileReaderService : IFileReaderService
         {
             using (var sr = new StreamReader(File.OpenRead(newFilePathName)))
             {
-                content = sr.ReadToEnd();
+                content = await sr.ReadToEndAsync().ConfigureAwait(false);
             }
         }
         catch (Exception ex) 

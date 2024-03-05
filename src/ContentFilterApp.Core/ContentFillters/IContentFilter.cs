@@ -4,6 +4,6 @@ namespace ContentFilterApp.Core.ContentFilters
 {
     public interface IContentFilter
     {
-        string ProcessFile(IFilter[] filters, string? filePath = null);
+        Task<string> ProcessFile(IFilter[] filters, string? filePath = null);
     }
 }

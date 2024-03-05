@@ -1,8 +1,4 @@
-﻿
-
-using ContentFilterApp.Core.ContentFillters.Filter.Words;
-using ContentFilterApp.Core.ContentFillters.Interface;
-using ContentFilterApp.Core.ContentFilters;
+﻿using ContentFilterApp.Core.ContentFilters;
 using ContentFilterApp.FilterApp;
 using ContentFilterApp.Infrastructure.Interfaces;
 using ContentFilterApp.Infrastructure.Services;
@@ -27,8 +23,10 @@ static IHostBuilder CreateHostBuilder(string[] args)
 
             services.AddSingleton(cfg);
             services.AddLogging(l => l.AddSimpleConsole());
+
+            services.Configure<AppOptions>(opt => cfg.GetSection("AppOptions").Bind(opt));
+
         });
-        
 }
 
 using IHost host = CreateHostBuilder(args).Build();
@@ -37,7 +35,7 @@ var services = scope.ServiceProvider;
 
 try
 {
-    services.GetRequiredService<IFilterApp>().Handle();
+    await services.GetRequiredService<IFilterApp>().Handle();
 }
 catch(Exception ex)
 {

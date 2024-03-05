@@ -20,26 +20,26 @@ namespace UnitTest.Infrastructure
         }
 
         [Fact]
-        public void FileReaderService_WhenFileIsAccessible_ReturnContentsOfFile()
+        public async Task FileReaderService_WhenFileIsAccessible_ReturnContentsOfFile()
         {
             //Arrange
             var service = CreateFileReader();
 
             //Act
-            var result = service.ReadFile(Constants.FileReaderService.FilePath1);
+            var result = await service.ReadFile(Constants.FileReaderService.FilePath1);
 
             //Assert
             Assert.Equal(Constants.FileReaderService.FilePath1_CorrectFileContents, result);
         }
 
         [Fact]
-        public void FileReaderService_PathIsIncorrect_ThrowFileNotFoundException()
+        public async Task FileReaderService_PathIsIncorrect_ThrowFileNotFoundException()
         {
             //Arrange
             var service = CreateFileReader();
 
             //Act
-            var ex = Assert.Throws<FileNotFoundException>(() => service.ReadFile(Constants.FileReaderService.InvalidFilePath));
+            var ex = await Assert.ThrowsAsync<FileNotFoundException>(() => service.ReadFile(Constants.FileReaderService.InvalidFilePath));
 
             //Assert
             Assert.IsType<FileNotFoundException>(ex);
@@ -47,13 +47,13 @@ namespace UnitTest.Infrastructure
         }
 
         [Fact]
-        public void FileReaderService_FileIsEmpty_ThrowExceptionSightingContentsEmpty()
+        public async Task FileReaderService_FileIsEmpty_ThrowExceptionSightingContentsEmpty()
         {
             //Arrange
             var service = CreateFileReader();
 
             //Act
-            var ex = Assert.Throws<Exception>(() => service.ReadFile(Constants.FileReaderService.EmptyFile));
+            var ex = await Assert.ThrowsAsync<Exception>(() => service.ReadFile(Constants.FileReaderService.EmptyFile));
 
             //Assert
             Assert.IsType<Exception>(ex);
