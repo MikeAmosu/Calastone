@@ -15,7 +15,7 @@ public class ExcludeWordFilter : IFilter
 
     public string CreateRules()
     {
-        if (string.IsNullOrEmpty(_charsToExclude))
+        if (string.IsNullOrWhiteSpace(_charsToExclude))
         {
             throw new ArgumentNullException("_charsToExclude", $"No rules defined in {nameof(ExcludeWordFilter)}");
         }

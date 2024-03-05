@@ -19,7 +19,7 @@ public class MiddleCharVowelWordFilter : IFilter
     {
         StringBuilder rules = new StringBuilder("");
 
-        if( string.IsNullOrEmpty(_charsToFind))
+        if( string.IsNullOrWhiteSpace(_charsToFind))
         {
             throw CreateNoCharactersDefinedException();
         }
