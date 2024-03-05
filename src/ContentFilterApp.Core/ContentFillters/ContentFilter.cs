@@ -40,7 +40,7 @@ public class ContentFilter : IContentFilter
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"Error occurred applying filters");
+            _logger.LogError(ex, "{className}.{methodName} Error occurred applying filters", nameof(ContentFilter), nameof(ApplyFilters));
             throw;
         }
 

@@ -6,6 +6,7 @@ using ContentFilterApp.Core.ContentFilters;
 using ContentFilterApp.FilterApp;
 using ContentFilterApp.Infrastructure.Interfaces;
 using ContentFilterApp.Infrastructure.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -18,7 +19,14 @@ static IHostBuilder CreateHostBuilder(string[] args)
             services.AddScoped<IContentFilter, ContentFilter>();
             services.AddScoped<IFileReaderService, FileReaderService>();
             services.AddScoped<IFilterApp, FilterApp>();
-            //services.AddScoped<ILogger>();
+
+            var cfg = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            services.AddSingleton(cfg);
+            services.AddLogging(l => l.AddSimpleConsole());
         });
         
 }
