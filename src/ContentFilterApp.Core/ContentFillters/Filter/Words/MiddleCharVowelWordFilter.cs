@@ -19,7 +19,7 @@ public class MiddleCharVowelWordFilter : IFilter
     {
         StringBuilder rules = new StringBuilder("");
 
-        if( string.IsNullOrEmpty(_charsToFind))
+        if( string.IsNullOrWhiteSpace(_charsToFind))
         {
             throw CreateNoCharactersDefinedException();
         }
@@ -30,7 +30,7 @@ public class MiddleCharVowelWordFilter : IFilter
 
     private ArgumentNullException CreateNoCharactersDefinedException()
     {
-        return new ArgumentNullException($"No characters defined as rules in {nameof(MiddleCharVowelWordFilter)}");
+        return new ArgumentNullException("_charsToFind", $"No characters defined as rules in {nameof(MiddleCharVowelWordFilter)}");
     }
 
     public string Process(string text, string rules)

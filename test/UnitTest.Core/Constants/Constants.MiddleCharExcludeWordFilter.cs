@@ -42,6 +42,6 @@ public static partial class Constants
                                             "Ive Passed");
 
         public static readonly string NoCharacterDefinedAsRuleErrorMessage =
-            $"Value cannot be null. (Parameter 'No characters defined as rules in {nameof(ContentFilterApp.Core.ContentFillters.Filter.Words.MiddleCharVowelWordFilter)}')";
+            $"No characters defined as rules in {nameof(ContentFilterApp.Core.ContentFillters.Filter.Words.MiddleCharVowelWordFilter)} (Parameter '_charsToFind')";
     }
 }

@@ -2,5 +2,5 @@
 
 public interface IFileReaderService
 {
-    string ReadFile(string? newfilePath = null);
+    Task<string> ReadFile(string? newfilePath = null);
 }

@@ -23,10 +23,10 @@ public static partial class Constants
             $"Value cannot be null. (Parameter 'No rules defined in {nameof(ContentFilterApp.Core.ContentFillters.Filter.Words.LengthCheckWordFilter)}')";
 
         public static readonly string ArgumentErrorForGreaterThanRulesErrorMessage =
-            $"Parameter greaterThan must be > 0";
+            $"Parameter greaterThan must be > 0 (Parameter '_greaterThanLengthRule')";
 
         public static readonly string ArgumentErrorForLessThanRulesErrorMessage =
-            $"Parameter lessThan must be > 0";
+            $"Parameter lessThan must be > 0 (Parameter '_lessThanLengthRule')";
 
         public static readonly string ArgumentErrorInvalidParametersErrorMessage =
             $"Parameter lessThan must be less than parameter greaterThan";

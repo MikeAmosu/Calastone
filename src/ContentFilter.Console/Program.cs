@@ -1,11 +1,8 @@
-﻿
-
-using ContentFilterApp.Core.ContentFillters.Filter.Words;
-using ContentFilterApp.Core.ContentFillters.Interface;
-using ContentFilterApp.Core.ContentFilters;
+﻿using ContentFilterApp.Core.ContentFilters;
 using ContentFilterApp.FilterApp;
 using ContentFilterApp.Infrastructure.Interfaces;
 using ContentFilterApp.Infrastructure.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -18,9 +15,18 @@ static IHostBuilder CreateHostBuilder(string[] args)
             services.AddScoped<IContentFilter, ContentFilter>();
             services.AddScoped<IFileReaderService, FileReaderService>();
             services.AddScoped<IFilterApp, FilterApp>();
-            //services.AddScoped<ILogger>();
+
+            var cfg = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            services.AddSingleton(cfg);
+            services.AddLogging(l => l.AddSimpleConsole());
+
+            services.Configure<AppOptions>(opt => cfg.GetSection("AppOptions").Bind(opt));
+
         });
-        
 }
 
 using IHost host = CreateHostBuilder(args).Build();
@@ -29,7 +35,7 @@ var services = scope.ServiceProvider;
 
 try
 {
-    services.GetRequiredService<IFilterApp>().Handle();
+    await services.GetRequiredService<IFilterApp>().Handle();
 }
 catch(Exception ex)
 {

@@ -25,12 +25,12 @@ public class LengthCheckWordFilter : IFilter
 
         if(_greaterThanLengthRule.HasValue && _greaterThanLengthRule == 0)
         {
-            throw new ArgumentException("Parameter greaterThan must be > 0");
+            throw new ArgumentException("Parameter greaterThan must be > 0", "_greaterThanLengthRule");
         }
 
         if (_lessThanLengthRule.HasValue && _lessThanLengthRule == 0)
         {
-            throw new ArgumentException("Parameter lessThan must be > 0");
+            throw new ArgumentException("Parameter lessThan must be > 0", "_lessThanLengthRule");
         }
         
         if (_lessThanLengthRule.HasValue && _greaterThanLengthRule.HasValue

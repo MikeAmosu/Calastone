@@ -14,7 +14,7 @@ public class FileReaderService : IFileReaderService
         _filePath = string.Empty;
     }
 
-    public string ReadFile(string? newfilePath = null)
+    public async Task<string> ReadFile(string? newfilePath = null)
     {
         var newFilePathName = string.IsNullOrEmpty(newfilePath)
             ? _filePath 
@@ -24,7 +24,7 @@ public class FileReaderService : IFileReaderService
         {
             var errorStr = $"Unable to find File path {newFilePathName}";
             var ex = new FileNotFoundException(errorStr);
-            _logger.LogError(ex, errorStr);
+            _logger.LogError(ex, $"{{className}}.{{methodName}} {errorStr}", nameof(FileReaderService), nameof(ReadFile));
             throw ex;
         }
 
@@ -33,12 +33,12 @@ public class FileReaderService : IFileReaderService
         {
             using (var sr = new StreamReader(File.OpenRead(newFilePathName)))
             {
-                content = sr.ReadToEnd();
+                content = await sr.ReadToEndAsync().ConfigureAwait(false);
             }
         }
         catch (Exception ex) 
         {
-            _logger.LogError(ex, $"Error reading file!");
+            _logger.LogError(ex, $"{{className}}.{{methodName}} Error reading file!", nameof(FileReaderService), nameof(ReadFile));
             throw;
         }
         
@@ -47,7 +47,7 @@ public class FileReaderService : IFileReaderService
         {
             var errorStr = $"The file is empty. File Path: {newFilePathName}.";
             var ex = new Exception(errorStr);
-            _logger.LogError(ex, errorStr);
+            _logger.LogError(ex, $"{{className}}.{{methodName}} {errorStr}", nameof(FileReaderService), nameof(ReadFile));
             throw ex;
         }
 

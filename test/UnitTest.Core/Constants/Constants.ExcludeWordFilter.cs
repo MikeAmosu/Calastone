@@ -17,7 +17,6 @@ public static partial class Constants
         public static readonly ExcludeFilterTestConditions Expected8 = new ExcludeFilterTestConditions("klKl", "x1x x2x x3x x4x", "x1x x2x x3x x4x");
 
         public static readonly string NoRulesDefinedErrorMessage =
-            $"Value cannot be null. (Parameter 'No rules defined in {nameof(ContentFilterApp.Core.ContentFillters.Filter.Words.ExcludeWordFilter)}')";
-
+            $"No rules defined in {nameof(ContentFilterApp.Core.ContentFillters.Filter.Words.ExcludeWordFilter)} (Parameter '_charsToExclude')";
     }
 }

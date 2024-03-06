@@ -38,7 +38,7 @@ namespace UnitTest.Core.Filters
 
             //Assert
             Assert.IsType<ArgumentNullException>(ex);
-            Assert.Equal(ex.Message, Constants.LengthCheckFilter.NoRulesDefinedErrorMessage);
+            Assert.Equal(Constants.LengthCheckFilter.NoRulesDefinedErrorMessage, ex.Message);
         }
 
         [Fact]
@@ -48,11 +48,11 @@ namespace UnitTest.Core.Filters
             var service = CreateWordFilter(null, 0);
 
             //Act
-            var ex = Assert.Throws<ArgumentException>(() => service.CreateRules());
+            var ex = Assert.Throws<ArgumentException>("_greaterThanLengthRule", () => service.CreateRules());
 
             //Assert
             Assert.IsType<ArgumentException>(ex);
-            Assert.Equal(ex.Message, Constants.LengthCheckFilter.ArgumentErrorForGreaterThanRulesErrorMessage);
+            Assert.Equal(Constants.LengthCheckFilter.ArgumentErrorForGreaterThanRulesErrorMessage, ex.Message);
         }
 
         [Fact]
@@ -62,11 +62,11 @@ namespace UnitTest.Core.Filters
             var service = CreateWordFilter(0, null);
 
             //Act
-            var ex = Assert.Throws<ArgumentException>(() => service.CreateRules());
+            var ex = Assert.Throws<ArgumentException>("_lessThanLengthRule", () => service.CreateRules());
 
             //Assert
             Assert.IsType<ArgumentException>(ex);
-            Assert.Equal(ex.Message, Constants.LengthCheckFilter.ArgumentErrorForLessThanRulesErrorMessage);
+            Assert.Equal(Constants.LengthCheckFilter.ArgumentErrorForLessThanRulesErrorMessage, ex.Message);
         }
 
         [Fact]
@@ -80,7 +80,7 @@ namespace UnitTest.Core.Filters
 
             //Assert
             Assert.IsType<ArgumentException>(ex);
-            Assert.Equal(ex.Message, Constants.LengthCheckFilter.ArgumentErrorInvalidParametersErrorMessage);
+            Assert.Equal(Constants.LengthCheckFilter.ArgumentErrorInvalidParametersErrorMessage, ex.Message);
         }
 
         public static IEnumerable<object[]> ValidLengthWordRules()

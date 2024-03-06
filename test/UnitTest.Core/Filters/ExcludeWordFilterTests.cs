@@ -37,7 +37,7 @@ namespace UnitTest.Core.Filters
 
             //Assert
             Assert.IsType<ArgumentNullException>(ex);
-            Assert.Equal(ex.Message, Constants.ExcludeWordFilter.NoRulesDefinedErrorMessage);
+            Assert.Equal(Constants.ExcludeWordFilter.NoRulesDefinedErrorMessage, ex.Message);
         }
 
         public static IEnumerable<object[]> ValidExcludeWordRules()
